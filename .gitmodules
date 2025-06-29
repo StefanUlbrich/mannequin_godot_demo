@@ -1,0 +1,3 @@
+[submodule "external/godot-xr-tools"]
+	path = external/godot-xr-tools
+	url = https://github.com/GodotVR/godot-xr-tools.git
