@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://gdeqmyi6sjan"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_r20wb"]
+[ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="2_240l4"]
+[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="3_47sic"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_gl7hy"]
+height = 0.2
+radius = 0.01
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_spxwp"]
+top_radius = 0.01
+bottom_radius = 0.01
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tkhgv"]
+transparency = 1
+albedo_color = Color(0, 0, 1, 0.678431)
+
+[node name="PickableObject" instance=ExtResource("1_r20wb")]
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("CylinderShape3D_gl7hy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+mesh = SubResource("CylinderMesh_spxwp")
+surface_material_override/0 = SubResource("StandardMaterial3D_tkhgv")
+
+[node name="GrabPointHandLeft" parent="." index="2" instance=ExtResource("2_240l4")]
+transform = Transform3D(1, 0, 0, 0, 0.999896, -0.0143985, 0, 0.0143985, 0.999896, 0.0186606, 0.0433154, -0.0894786)
+
+[node name="GrabPointHandRight" parent="." index="3" instance=ExtResource("3_47sic")]
+transform = Transform3D(1, 0, 0, 0, 0.99834, -0.0575989, 0, 0.0575989, 0.99834, -0.0183279, 0.0485724, -0.0868484)

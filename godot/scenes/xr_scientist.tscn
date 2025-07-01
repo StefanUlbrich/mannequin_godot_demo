@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=3 uid="uid://baygk7u1d45yv"]
+
+[ext_resource type="PackedScene" uid="uid://bq86r4yll8po" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_fullglove_low.tscn" id="1_2d62h"]
+[ext_resource type="PackedScene" uid="uid://bl2nuu3qhlb5k" path="res://addons/godot-xr-tools/functions/movement_direct.tscn" id="2_anwet"]
+[ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="3_rdghb"]
+[ext_resource type="PackedScene" uid="uid://clt88d5d1dje4" path="res://addons/godot-xr-tools/functions/movement_crouch.tscn" id="4_rdghb"]
+[ext_resource type="PackedScene" uid="uid://xqimcf20s2jp" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_fullglove_low.tscn" id="4_u0tea"]
+[ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="5_y8cp8"]
+[ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="6_qdxi5"]
+[ext_resource type="PackedScene" uid="uid://c2q5phg8w08o" path="res://addons/godot-xr-tools/functions/movement_jump.tscn" id="7_u0tea"]
+
+[node name="XROrigin3D" type="XROrigin3D"]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="."]
+
+[node name="Controller_left" type="XRController3D" parent="."]
+tracker = &"left_hand"
+
+[node name="LeftHand" parent="Controller_left" instance=ExtResource("1_2d62h")]
+
+[node name="MovementDirect" parent="Controller_left" instance=ExtResource("2_anwet")]
+strafe = true
+
+[node name="FunctionPickup" parent="Controller_left" instance=ExtResource("3_rdghb")]
+
+[node name="MovementCrouch" parent="Controller_left" instance=ExtResource("4_rdghb")]
+crouch_button_action = "ax_button"
+
+[node name="Controller_right" type="XRController3D" parent="."]
+tracker = &"right_hand"
+
+[node name="RightHand" parent="Controller_right" instance=ExtResource("4_u0tea")]
+
+[node name="MovementTurn" parent="Controller_right" instance=ExtResource("5_y8cp8")]
+turn_mode = 1
+
+[node name="FunctionPickup" parent="Controller_right" instance=ExtResource("3_rdghb")]
+
+[node name="MovementJump" parent="Controller_right" instance=ExtResource("7_u0tea")]
+jump_button_action = "ax_button"
+
+[node name="PlayerBody" parent="." instance=ExtResource("6_qdxi5")]

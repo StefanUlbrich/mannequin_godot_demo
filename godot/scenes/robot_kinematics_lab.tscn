@@ -1,0 +1,86 @@
+[gd_scene load_steps=13 format=3 uid="uid://ctmnbivt8ely4"]
+
+[ext_resource type="PackedScene" uid="uid://bcq1ak30sir3c" path="res://scenes/kinematics_experiment.tscn" id="1_m6ex2"]
+[ext_resource type="Script" uid="uid://clyhc7k2c2xed" path="res://scenes/robot_kinematics_lab.gd" id="1_t3ghv"]
+[ext_resource type="PackedScene" uid="uid://cl0oj4e6sonfx" path="res://scenes/tray2.tscn" id="2_0b756"]
+[ext_resource type="PackedScene" uid="uid://baygk7u1d45yv" path="res://scenes/xr_scientist.tscn" id="5_up4rj"]
+[ext_resource type="PackedScene" uid="uid://1rdqh8hyjfg2" path="res://scenes/pickable_object_green.tscn" id="9_0k7dm"]
+[ext_resource type="PackedScene" uid="uid://gdeqmyi6sjan" path="res://scenes/pickable_object_blue.tscn" id="10_tt0hb"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_bgbhq"]
+
+[sub_resource type="Sky" id="Sky_vfggy"]
+sky_material = SubResource("PhysicalSkyMaterial_bgbhq")
+
+[sub_resource type="Environment" id="Environment_vfggy"]
+background_mode = 2
+background_energy_multiplier = 1.27
+sky = SubResource("Sky_vfggy")
+
+[sub_resource type="BoxMesh" id="BoxMesh_vsogw"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0b756"]
+albedo_color = Color(0.329158, 0.329158, 0.329158, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tt0hb"]
+size = Vector3(20, 1, 20)
+
+[node name="robot_ik" type="Node3D"]
+script = ExtResource("1_t3ghv")
+
+[node name="Experiment 1" parent="." instance=ExtResource("1_m6ex2")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 3)
+
+[node name="Skeleton3D" parent="Experiment 1/Schunk" index="1"]
+bones/0/enabled = false
+bones/1/rotation = Quaternion(0, 0, -3.55271e-15, 1)
+bones/2/rotation = Quaternion(0.707107, 8.09017e-05, -8.09017e-05, 0.707107)
+bones/3/rotation = Quaternion(0, 0, -0.000292809, 1)
+bones/4/rotation = Quaternion(-0.707107, -5.46929e-08, -5.46929e-08, 0.707107)
+bones/5/rotation = Quaternion(0.707107, 0.000206316, -0.000206316, 0.707107)
+bones/6/rotation = Quaternion(-0.707107, -1.45345e-07, -1.45345e-07, 0.707107)
+bones/7/enabled = false
+
+[node name="RsMannequinIK" parent="Experiment 1/Schunk/Skeleton3D" index="0" node_paths=PackedStringArray("main_target")]
+velocity = 1.0
+main_target = NodePath("../../../../Node3D/Green")
+method = "Gradient"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vfggy")
+
+[node name="scientist" parent="." instance=ExtResource("5_up4rj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.772396, 1.57604)
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_vsogw")
+surface_material_override/0 = SubResource("StandardMaterial3D_0b756")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_tt0hb")
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="Tray2" parent="Node3D" instance=ExtResource("2_0b756")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0190347, 0)
+
+[node name="Green" parent="Node3D" instance=ExtResource("9_0k7dm")]
+transform = Transform3D(0.125074, -0.992148, 0, 0.992148, 0.125074, 0, 0, 0, 1, 0.201717, 0.449284, -0.105116)
+
+[node name="Blue2" parent="Node3D" instance=ExtResource("10_tt0hb")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.420634, 0.0812218)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.0205759, 0.999788, 0, -0.999788, 0.0205759, 0, 4.67646, 0)
+shadow_enabled = true
+
+[connection signal="button_released" from="scientist/Controller_left" to="." method="_on_controller_left_button_released"]
+
+[editable path="Experiment 1"]
+[editable path="Experiment 1/Schunk"]
+[editable path="scientist"]
