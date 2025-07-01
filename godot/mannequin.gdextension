@@ -1,0 +1,16 @@
+[configuration]
+entry_symbol = "gdext_rust_init"
+compatibility_minimum = 4.3
+reloadable = true
+
+[libraries]
+android.debug.arm64 =     "res://../rust/target/aarch64-linux-android/debug/libgodot_mannequin.so"
+android.release.arm64 =   "res://../rust/target/aarch64-linux-android/release/libgodot_mannequin.so"
+linux.debug.x86_64 =     "res://../rust/target/debug/libgodot_mannequin.so"
+linux.release.x86_64 =   "res://../rust/target/release/libgodot_mannequin.so"
+windows.debug.x86_64 =   "res://../rust/target/debug/godot_mannequin.dll"
+windows.release.x86_64 = "res://../rust/target/release/godot_mannequin.dll"
+macos.debug =            "res://../rust/target/debug/libgodot_mannequin.dylib"
+macos.release =          "res://../rust/target/release/libgodot_mannequin.dylib"
+macos.debug.arm64 =      "res://../rust/target/debug/libgodot_mannequin.dylib"
+macos.release.arm64 =    "res://../rust/target/release/libgodot_mannequin.dylib"

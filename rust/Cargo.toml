@@ -1,0 +1,20 @@
+[package]
+name = "godot_mannequin"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+faer = "0.21.9"
+# faer = { version = "0.21.7", default-features = false, features = ["std", "npy"] }
+godot = "0.3.1"
+# godot = { git = "https://github.com/godot-rust/gdext", branch = "master" }
+
+itertools = "0.14.0"
+mannequin = { path = "../../../code/mannequin", features = ["faer", "godot"] }
+
+
+[profile.dev.package.faer]
+opt-level = 3
