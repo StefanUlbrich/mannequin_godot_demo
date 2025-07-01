@@ -24,6 +24,10 @@ XRToolsRumbleManager="*res://addons/godot-xr-tools/rumble/rumble_manager.gd"
 
 project/assembly_name="robot_ik_vr"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg")
+
 [rendering]
 
 renderer/rendering_method="mobile"
